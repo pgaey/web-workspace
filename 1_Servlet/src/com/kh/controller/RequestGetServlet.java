@@ -66,7 +66,7 @@ public class RequestGetServlet extends HttpServlet {
 		 * 
 		 * - request.getParameterValues("키값") : String[] (그에 해당하는 value값)
 		 * => 하나의 key값으로 여러개의 value들을 받는 경우( ex: checkbox)
-		 *    String형 배열로 반환 
+		 *    [String형 배열]로 반환 
 		 * 
 		 */
 		
@@ -106,7 +106,7 @@ public class RequestGetServlet extends HttpServlet {
 		}
 		
 		// 자주보는 오류
-		// 404 : 파일이나 요청을 받앚우는 서블릿을 못찾았을 때 발생 => 경로를 잘못적었거나 파일명에 오타가 났을 때
+		// 404 : 파일이나 요청을 받아주는 서블릿을 못찾았을 때 발생 => 경로를 잘못적었거나 파일명에 오타가 났을 때
 		// 500 : 자바 소스코드상의 오류(예외발생)
 		
 		// 2단계

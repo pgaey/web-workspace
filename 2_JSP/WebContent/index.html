@@ -41,7 +41,56 @@
 		</li>
 	</ol>
 
-	<a href="view/01_ScriptingElement.jsp">View Detail &raquo;</a>	
+	<a href="view/01_ScriptingElement.jsp">View Detail &raquo;</a>
+	
+	<hr>
+	
+	<h3>2. 지시어 또는 지시자(Directive)</h3>
+	<p>
+		JSP page 전체에 영향을 미치는 정보를 기술할 때 쓰임 <br> <!-- 페이지에 대한 설정 -->
+		
+		[ 표현법 ]
+		&lt;%@ page/include/taglib 속성="속성값" .... %&gt;
+		
+	</p>
+	
+	<ol>
+		<li>
+			taglib : JSP기능을 조금 더 확장할 수 있는 인자로 추가적인 라이브러리를 등록하는 구문 <br>
+		</li>
+		<li>
+			page 지시어 : 현재 JSP페이지를 처리하는데 필요한 각종 속성들을 기술하는 부분 <br>
+		</li>
+		
+		<ul>
+			<li>language : 사용할 언어 유형을 지정</li>
+			<li>contentType : 웹브라우저가 받아볼 페이지의 형식, 인코딩 방식</li>
+			<li>pageEncoding : JSP파일에 기록된 자바코드의 인코딩 방식 </li>
+			<li>import : 자바의 import구문과 같은 의미 </li>
+			<li>errorPage : 해당 JSP상에 오류가 발생했을 때 보여줄 에러페이지의 경로 지정</li>
+		</ul>
+		<a href="view/02_DirectivePage.jsp">View Detail &raquo;</a>
+		
+		<li>
+			include 지시어 : jsp파일안에 또 다른 jsp파일을 포함시키고자 할 때 사용하는 지시어 <br>
+			<a href="view/03_DirectiveInclude.jsp">View Detail &raquo;</a>
+		</li>
+	</ol>
+	
+	<hr>
+	
+	<h2>치킨 주문 페이지 --주문요청--> 주문요청을 받아서 처리해주는 Servlet --> 치킨결제페이지(응답JSP)</h2>
+	<a href="view/04_ChickenOrderForm.jsp">치킨 주문하러가기</a>
+
+
+
+
+
+
+
+
+
+
 
 
 
