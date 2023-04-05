@@ -2,12 +2,14 @@ package com.kh.subway.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.subway.model.service.SubwayService;
 import com.kh.subway.model.vo.Order;
 
 /**
@@ -38,18 +40,18 @@ public class SubwayOrderController extends HttpServlet {
 		
 		// 뽑아다가 변수에 담아두기
 		// 주문자 정보 뽑기!
-		String userName = (String)request.getParameter("userName");
-		String phone = (String)request.getParameter("phone");
-		String address = (String)request.getParameter("address");
-		String message = (String)request.getParameter("message");
+		String userName = request.getParameter("userName");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String message = request.getParameter("message");
 		
 		// 주문정보 뽑기!
-		String sandwich = (String)request.getParameter("sandwich");
+		String sandwich = request.getParameter("sandwich");
 		// checkbox == request.getParameterValues() => String[] => 체크된게 하나도 없을 경우 null
-		String[] vegetable = (String[])request.getParameterValues("vegetable");
-		String[] sauce = (String[])request.getParameterValues("sauce");
-		String[] cookie = (String[])request.getParameterValues("cookie");
-		String payment = (String)request.getParameter("payment");
+		String[] vegetable = request.getParameterValues("vegetable");
+		String[] sauce = request.getParameterValues("sauce");
+		String[] cookie = request.getParameterValues("cookie");
+		String payment = request.getParameter("payment");
 		
 		// 3) 가공 => VO클래스 객체 생성해서 거기 담았음
 		
@@ -103,9 +105,31 @@ public class SubwayOrderController extends HttpServlet {
 								price,
 								null);
 		
+		// 4) Service단으로 토스~
+		int result = new SubwayService().insertOrder(order);
 		
 		
 		
+		// 수하물 붙이기 => request의 Attribute영역에 담기
+		request.setAttribute("sandwich", sandwich);
+		request.setAttribute("vegetable", vegetable);
+		request.setAttribute("sauce", sauce);
+		request.setAttribute("cookie", cookie);
+		request.setAttribute("payment", payment);
+		request.setAttribute("price", price);
+		
+		
+		// 응답 뷰 지정 => 응답화면 만들어줄 jsp로 포워딩
+		
+		if(result > 0) {
+			RequestDispatcher view = request.getRequestDispatcher("views/result.jsp");	
+			view.forward(request, response);
+		}
+		
+		
+		
+		
+	
 		
 		
 		
