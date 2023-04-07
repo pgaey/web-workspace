@@ -114,8 +114,118 @@ public class MemberDao {
 		return result;
 	}
 	
+	public int updateMember(Connection conn, Member m) {
+		
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getUserName());
+			pstmt.setString(2, m.getPhone());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getAddress());
+			pstmt.setString(5, m.getInterest());
+			pstmt.setString(6, m.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+			if(result > 0) {
+				
+			}
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	JDBCTemplate.close(pstmt);
+		return result;
+	}
+	
+	public Member selectMember(Connection conn, String userId) {
+		
+		// SELECT문 => MEMBER
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("USER_NO"),
+							   rset.getString("USER_ID"),
+							   rset.getString("USER_PWD"),
+							   rset.getString("USER_NAME"),
+							   rset.getString("PHONE"),
+							   rset.getString("EMAIL"),
+							   rset.getString("ADDRESS"),
+							   rset.getString("INTEREST"),
+							   rset.getDate("ENROLL_DATE"),
+							   rset.getDate("MODIFY_DATE"),
+							   rset.getString("STATUS"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return m;
+	}
+	
+	public int updatePwdMember(Connection conn, int userNo, String userPwd, String updatePwd) {
+		
+		// UPDATE문 => 처리된 행의 개수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, updatePwd);
+			pstmt.setInt(2, userNo);
+			pstmt.setString(3, userPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
+	public int deleteMem(Connection conn, int userNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

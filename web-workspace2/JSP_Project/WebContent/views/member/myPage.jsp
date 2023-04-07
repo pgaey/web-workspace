@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>정보를 바꿔줘 ~</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   
 <style>
     .outer{
         background-color : rgb(100, 190, 100);
@@ -114,15 +114,131 @@
 
 
             <div align="center">
-                <button type="submit">정보수정</button>
-                <button type="button">비밀번호수정</button>
-                <button type="button">회원탈퇴</button>
+                <button type="submit" class="btn-info">정보수정</button>
+                <button type="button" data-toggle="modal" data-target="#updatePwdForm">비밀번호수정</button>
+                <button type="button" class="btn-danger" data-toggle="modal" data-target="#deleteMem">회원탈퇴</button>
             </div>
 
 
             <br><br><br>
         </form>
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Button to Open the Modal -->
+
+    <!-- 비밀번호 변경 모달창 -->
+    <div class="modal" id="updatePwdForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">로그인</h4>
+            <button type="button" class="close" data-dismiss="modal">이거누르면닫힘</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="<%= contextPath %>/updatePwd.me" method="post">
+            
+            	<!-- 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력 -->
+            
+                <div class="form-group">
+                  <label for="userPwd">현재 비밀번호 : </label>
+                  <input type="password" class="form-control" id="userPwd" placeholder="비밀번호를 입력해주세요" name="userPwd" required>
+                </div>
+                <div class="form-group">
+                  <label for="updatePwd">변경할 비밀번호 :</label>
+                  <input type="password" class="form-control" id="updatePwd" placeholder="변경할 비밀번호를 입력해주세요" name="updatePwd" required>
+                </div>
+                <div class="form-group">
+                  <label for="updatePwd">변경할 비밀번호 확인 :</label>
+                  <input type="password" class="form-control" placeholder="변경할 비밀번호를 다시 입력해주세요" name="checkPwd" required>
+                </div>
+                
+                <button type="submit" class="btn btn-danger" onclick="return validatePwd()">비밀번호 변경</button>
+                <!-- 확실하게 사용자를 판별할 수 있는 유저번호도 같이 넘겨줌 -->
+                <input type="hidden" value="<%= loginUser.getUserNo() %>" name="userNo">
+                
+               	<script>
+                    function validatePwd(){
+
+                        if($('#updatePwd').val() != $('input[name=checkPwd]').val()){
+                            alert("비밀번호를 동일하게 입력해주세요 ! ");
+                            $('input[name=checkPwd]').focus();
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    };
+               	</script>
+                
+              </form>
+        </div>
+
+        </div>
+    </div>
+    </div>
+    
+    
+    
+    <!-- 회원탈퇴 모달창  -->
+	<div class="modal" id="deleteMem">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	        
+
+	        <!-- Modal body -->
+	        <div class="modal-body">
+	            <form action="<%= contextPath %>/deleteMem.me" method="post">
+	            
+	                <div class="form-group">
+	                  <label for="userPwd2">비밀번호를 입력하세요 </label>
+	                  <input type="password" class="form-control" id="userPwd2" placeholder="비밀번호를 입력해주세요" name="userPwd2" required>
+	                </div>
+
+	                
+	                <button type="submit" class="btn btn-danger" onclick="return deleteMem()">회원탈퇴</button>
+	                
+	                <!-- 확실하게 사용자를 판별할 수 있는 유저번호도 같이 넘겨줌 -->
+	                <input type="hidden" value="<%= loginUser.getUserNo() %>" name="userNo">
+	
+					<script>
+                    function deleteMem(){
+
+                        if($('#userPwd2').val() != '<%= loginUser.getUserPwd() %>'){
+                            alert("일치하지 않습니다!");
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    };
+               	</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>

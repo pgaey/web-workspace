@@ -21,6 +21,11 @@
 <meta charset="UTF-8">
 <title>나는 메뉴바다</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
 	
 	.login-area, #user-info{
@@ -144,7 +149,7 @@
 			<div align="center">
 				<a href="<%= contextPath %>/myPage.me">마이페이지</a>
 				<!-- <a href="/jsp/logout.me">로그아웃</a>  -->
-				<a href="<%= contextPath %>/logout.me">로그아웃</a>
+				<a href="<%= contextPath %>/logout.me" class="btn-danger">로그아웃</a>
 			</div>
 		</div>
 		<% } %>

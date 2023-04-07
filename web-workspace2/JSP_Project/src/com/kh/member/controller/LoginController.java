@@ -43,7 +43,6 @@ public class LoginController extends HttpServlet {
 		// 1) POST방식일 경우 인코딩 설정
 		request.setCharacterEncoding("UTF-8");
 		
-		
 		// 2) 요청 시 전달값을 꺼내서 변수에 기록 => request의 Parameter영역
 		// request.getParameter("키값") : String
 		// request.getParameterValues("키값") : String[] => checkbox일 경우 사용
@@ -131,7 +130,6 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("loginUser", loginUser);
 			
 			session.setAttribute("alertMsg", "로그인 성공 ~ 축하한다 ~ ");
-			
 			
 			// * 포워딩 방식
 			/*
